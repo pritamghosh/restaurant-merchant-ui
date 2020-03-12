@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+::ng-deep {
+  mat-form-field {
+    width: 100%;
+  }
+  .box {
+    margin-top: 20px;
+    border: 1px;
+    border-style: groove;
+    border-radius: 10px;
+    padding: 10px;
+    border-top-right-radius: 10px;
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  mat-card {
+    margin: 15px;
+  }
+}
