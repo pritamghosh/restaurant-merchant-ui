@@ -1,11 +1,11 @@
 <mat-card>
   <div *ngFor="let item of items">
-    <hr />
     <app-menu-details
       [menu]="item.menuItem"
       [qty]="item.qty"
       [review]="true"
     ></app-menu-details>
+    <hr />
   </div>
   <div style="text-align: center;">
     <mat-form-field style="width: 100%;">
