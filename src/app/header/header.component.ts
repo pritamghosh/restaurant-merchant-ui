@@ -10,6 +10,7 @@ import { Router } from "@angular/router";
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn = false;
+  name = "";
   subs: Subscription;
   constructor(private loginService: LoginService, private router: Router) {}
 
@@ -17,7 +18,12 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn = this.loginService.isLoggedIn();
     this.subs = this.loginService.isLoggedInSubject
       .asObservable()
-      .subscribe(resp => (this.isLoggedIn = resp));
+      .subscribe(resp => {
+        this.isLoggedIn = resp;
+        if (this.isLoggedIn) {
+          this.name = this.loginService.getUser()?.restaurantName;
+        }
+      });
   }
 
   signOut() {

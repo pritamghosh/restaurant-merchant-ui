@@ -1,1 +1,50 @@
-<p>menu-details works!</p>
+<div class="row">
+  <div
+    class="col-md-6 col-sm-12 col-12"
+    style=";adding-top: 20px;padding-bottom: 20px;"
+  >
+    <span style="font-size: 20px;">{{ menu.name }}</span>
+  </div>
+  <div
+    class="col-md-3 col-sm-6 col-6"
+    style="padding-top: 5px;padding-bottom: 5px;"
+  >
+    <span style="font-size: 30px; font-weight: bold; "
+      ><fa-icon [icon]="icon" style="font-size: 20px;"></fa-icon>&nbsp;&nbsp;{{
+        price
+      }}</span
+    >
+  </div>
+  <div class="col-md-3 col-sm-6 col-6" style="text-align: right ;">
+    <div class="input-group mb-3" style="text-align: right ;">
+      <div class="input-group-prepend" style="text-align: right ;">
+        <button
+          class="input-group-text del"
+          id="basic-addon1"
+          style="cursor: pointer; background-color: blue; color: white; font-weight: bold;color: white;"
+          (click)="add()"
+        >
+          +
+        </button>
+      </div>
+
+      <input
+        readonly
+        aria-describedby="basic-addon1"
+        style="text-align: center;width: 25%;"
+        [(ngModel)]="qty"
+      />
+      <div class="input-group-append">
+        <button
+          [disabled]="qty <= 0"
+          class="input-group-text del"
+          id="basic-addon1"
+          (click)="minus()"
+          style="cursor: pointer;font-weight: bold;color: white;"
+        >
+          -
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

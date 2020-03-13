@@ -1,1 +1,42 @@
-<p>home works!</p>
+<div class="container box">
+  <div class="row">
+    <div class="col-md-12 col-lg-12" *ngIf="!review">
+      <mat-card>
+        <div style="text-align: right;padding-top: 10px; padding-bottom: 20px;">
+          <button
+            mat-raised-button
+            type="reset"
+            color="accent"
+            style="float: left;width: 100px;"
+            (click)="reset()"
+          >
+            Reset
+          </button>
+          <button
+            mat-raised-button
+            (click)="completeOrder()"
+            type="button"
+            color="primary"
+            style="width: 100px;"
+            [disabled]="isEmptyCart"
+          >
+            Complete
+          </button>
+        </div>
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let mg of menuGruops">
+            <mat-expansion-panel-header>
+              <mat-panel-title> {{ mg.category }} </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngFor="let menu of mg.menuList">
+              <hr />
+              <app-menu-details [menu]="menu"></app-menu-details>
+            </div>
+          </mat-expansion-panel> </mat-accordion
+      ></mat-card>
+    </div>
+    <div class="col-md-12 col-lg-12" *ngIf="review">
+      <app-review (back)="review = false"></app-review>
+    </div>
+  </div>
+</div>

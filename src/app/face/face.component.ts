@@ -95,6 +95,7 @@ export class FaceComponent implements OnInit {
             }
           },
           err => {
+            this.show();
             this.imageString = null;
           }
         );

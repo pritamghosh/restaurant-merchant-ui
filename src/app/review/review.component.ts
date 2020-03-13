@@ -1,6 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { OrderItem, Order } from "../models/order.model";
-import { Subject } from "rxjs";
 import { MatDialogConfig, MatDialog } from "@angular/material/dialog";
 import { FaceComponent } from "../face/face.component";
 import { OrderService } from "../services/order.service";
@@ -12,15 +11,20 @@ import { BusyDisplayService } from "../services/busy-display.service";
   styleUrls: ["./review.component.scss"]
 })
 export class ReviewComponent implements OnInit {
+  @Output() back: EventEmitter<any> = new EventEmitter();
   items: OrderItem[] = [];
-  email: string;
+  email: string = "";
   constructor(
     private service: OrderService,
     public dialog: MatDialog,
     private busyDisplayService: BusyDisplayService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.service.orderItemMap.forEach(element => {
+      this.items.push(element);
+    });
+  }
 
   openFaceIdDialog(): void {
     const dialogConfig = new MatDialogConfig();
@@ -46,8 +50,21 @@ export class ReviewComponent implements OnInit {
       }
     });
   }
-
-  onSubmit() {
+  get payDisable() {
+    if (this.email.length < 1) {
+      return true;
+    }
+    for (let val of this.service.orderItemMap.values()) {
+      if (val.qty > 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+  onBack() {
+    this.back.emit(null);
+  }
+  submit() {
     this.openFaceIdDialog();
   }
 }

@@ -1,5 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { NgModule, ErrorHandler } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -45,6 +45,7 @@ import { MenuDetailsComponent } from "./menu-details/menu-details.component";
 import { AlertComponent } from "./alert/alert.component";
 import { FaceComponent } from "./face/face.component";
 import { BusyDisplayComponent } from "./busy-display/busy-display.component";
+import { ErrorService } from "./services/error.service";
 
 @NgModule({
   declarations: [
@@ -94,7 +95,7 @@ import { BusyDisplayComponent } from "./busy-display/busy-display.component";
     MatProgressSpinnerModule,
     FontAwesomeModule
   ],
-  providers: [],
+  providers: [{ provide: ErrorHandler, useClass: ErrorService }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

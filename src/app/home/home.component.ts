@@ -1,15 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { MenuGroup, Menu } from "../models/restaurant.model";
+import { LoginService } from "../services/login.service";
+import { OrderService } from "../services/order.service";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: "app-home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent implements OnInit {
+  menuGruops: MenuGroup[];
 
-  constructor() { }
+  review = false;
+  constructor(
+    private loginService: LoginService,
+    private orderService: OrderService
+  ) {}
 
   ngOnInit(): void {
+    this.menuGruops = this.loginService.getUser()?.menuGruop;
+    this.menuGruops = [];
+    let mg = new MenuGroup();
+    mg.category = "Group 1";
+    mg.menuList = [];
+    let menu = new Menu();
+    menu.name = "menu";
+    menu.price = 100;
+    mg.menuList.push(menu);
+    mg.menuList.push(menu);
+    mg.menuList.push(menu);
+    mg.menuList.push(menu);
+    this.menuGruops.push(mg);
+    this.menuGruops.push(mg);
+    this.menuGruops.push(mg);
+    this.menuGruops.push(mg);
+    this.menuGruops.push(mg);
+    this.menuGruops.push(mg);
+    this.menuGruops.push(mg);
   }
 
+  completeOrder() {
+    this.review = true;
+  }
+  reset() {
+    this.orderService.resetSubject.next(true);
+  }
+
+  get isEmptyCart() {
+    return this.orderService.orderItemMap.size < 1 ? true : false;
+  }
 }
