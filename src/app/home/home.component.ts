@@ -19,24 +19,21 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.menuGruops = this.loginService.getUser()?.menuGruop;
-    this.menuGruops = [];
-    let mg = new MenuGroup();
-    mg.category = "Group 1";
-    mg.menuList = [];
-    let menu = new Menu();
-    menu.name = "menu";
-    menu.price = 100;
-    mg.menuList.push(menu);
-    mg.menuList.push(menu);
-    mg.menuList.push(menu);
-    mg.menuList.push(menu);
-    this.menuGruops.push(mg);
-    this.menuGruops.push(mg);
-    this.menuGruops.push(mg);
-    this.menuGruops.push(mg);
-    this.menuGruops.push(mg);
-    this.menuGruops.push(mg);
-    this.menuGruops.push(mg);
+    if (this.menuGruops == null) {
+      this.menuGruops = [];
+      let mg = new MenuGroup();
+      mg.category = "Group 1";
+      mg.menuList = [];
+      let menu = new Menu();
+      menu.name = "menu";
+      menu.price = 100;
+      mg.menuList.push(menu);
+      mg.menuList.push(menu);
+      mg.menuList.push(menu);
+      mg.menuList.push(menu);
+      this.menuGruops.push(mg);
+      this.menuGruops.push(mg);
+    }
   }
 
   completeOrder() {

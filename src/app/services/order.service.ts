@@ -30,8 +30,8 @@ export class OrderService {
     console.log(order);
     this.http.post(`${environment.api}/order`, order).subscribe((resp: any) => {
       console.log(resp);
-      this.alertService.openDiaolog(resp);
-      this.busyDisplayService.showBusyDisplay(false, "/");
+      this.busyDisplayService.showBusyDisplay(false);
+      this.alertService.openDiaolog(resp, "/");
     });
   }
 }
