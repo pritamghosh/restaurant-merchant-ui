@@ -13,6 +13,9 @@ export class ErrorService implements ErrorHandler {
         this.openDialog(error.error);
       });
     }
+    // else {
+    //   alert(error);
+    // }
   }
   constructor(
     private injector: Injector,

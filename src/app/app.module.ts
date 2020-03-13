@@ -46,6 +46,11 @@ import { AlertComponent } from "./alert/alert.component";
 import { FaceComponent } from "./face/face.component";
 import { BusyDisplayComponent } from "./busy-display/busy-display.component";
 import { ErrorService } from "./services/error.service";
+import {
+  AbstractCameraService,
+  cameraFactory
+} from "./services/abstract-camera.service";
+import { PlatformInformationProvider } from "./services/platform-information.provider";
 
 @NgModule({
   declarations: [
@@ -95,7 +100,14 @@ import { ErrorService } from "./services/error.service";
     MatProgressSpinnerModule,
     FontAwesomeModule
   ],
-  providers: [{ provide: ErrorHandler, useClass: ErrorService }],
+  providers: [
+    { provide: ErrorHandler, useClass: ErrorService },
+    {
+      provide: AbstractCameraService,
+      useFactory: cameraFactory,
+      deps: [PlatformInformationProvider]
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

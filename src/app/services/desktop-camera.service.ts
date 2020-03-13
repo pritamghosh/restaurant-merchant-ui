@@ -24,6 +24,19 @@ export class DesktopCameraService {
     return mediaDevices;
   }
 
+  show() {
+    this.getMediaDevices()
+      .getUserMedia({ video: true, audio: false })
+      .then(function(stream) {
+        var video: any = document.querySelector("#videoElement");
+        video.srcObject = stream;
+      })
+      .catch(function(error) {
+        console.log(error);
+
+        console.log("Something went wrong!");
+      });
+  }
   getPhoto(): Observable<string> {
     return Observable.create((observer: any) => {
       this.getMediaDevices()

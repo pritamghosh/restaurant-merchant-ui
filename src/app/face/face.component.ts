@@ -6,6 +6,7 @@ import { FormGroup, FormControl } from "@angular/forms";
 import { environment } from "../../environments/environment";
 import { DesktopCameraService } from "../services/desktop-camera.service";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { AbstractCameraService } from "../services/abstract-camera.service";
 @Component({
   selector: "app-face",
   templateUrl: "./face.component.html",
@@ -28,26 +29,12 @@ export class FaceComponent implements OnInit {
 
   constructor(
     private faceRecognitionService: FaceRecognitionService,
-    private cameraService: DesktopCameraService,
+    private cameraService: AbstractCameraService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<FaceComponent>
   ) {}
   public ngOnInit(): void {
-    this.show();
-  }
-  show() {
-    this.cameraService
-      .getMediaDevices()
-      .getUserMedia({ video: true, audio: false })
-      .then(function(stream) {
-        var video: any = document.querySelector("#videoElement");
-        video.srcObject = stream;
-      })
-      .catch(function(error) {
-        console.log(error);
-
-        console.log("Something went wrong!");
-      });
+    this.cameraService.show();
   }
   get submitButtonName() {
     return this.data.buttonName;
@@ -91,11 +78,11 @@ export class FaceComponent implements OnInit {
             } else {
               console.log("empty resp");
               this.imageString = null;
-              this.show();
+              this.cameraService.show();
             }
           },
           err => {
-            this.show();
+            this.cameraService.show();
             this.imageString = null;
           }
         );
