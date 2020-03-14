@@ -32,10 +32,11 @@ export class OrderService {
     order.restaurantUsername = this.loginService.getUser().username;
     console.log(order);
 
-    this.http.post(`${environment.api}/order`, order).subscribe((resp: any) => {
-      console.log(resp);
-      this.busyDisplayService.showBusyDisplay(false);
-      this.alertService.openDiaolog(resp, "/");
-    });
+    this.http
+      .post(`${environment.api}/order`, order, { responseType: "text" })
+      .subscribe((resp: any) => {
+        this.busyDisplayService.showBusyDisplay(false);
+        this.alertService.openDiaolog(resp, "/");
+      });
   }
 }

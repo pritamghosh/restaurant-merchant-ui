@@ -11,7 +11,7 @@
       <button mat-icon-button [matMenuTriggerFor]="userMenu">
         <mat-icon>person</mat-icon>
       </button>
-      <mat-menu #userMenu="matMenu">
+      <mat-menu #userMenu="matMenu" [hidden]="!isLoggedIn">
         <button mat-menu-item [routerLink]="['login']" [hidden]="isLoggedIn">
           Login
         </button>

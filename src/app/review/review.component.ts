@@ -65,12 +65,6 @@ export class ReviewComponent implements OnInit {
     this.back.emit(null);
   }
   submit() {
-    this.busyDisplayService.showBusyDisplay(true);
-    let order = new Order();
-    order.email = this.email;
-    // order.faceId = dialogConfig.data.faceId;
-    order.orderItems = this.items;
-    this.service.placeOrder(order);
-    //this.openFaceIdDialog();
+    this.openFaceIdDialog();
   }
 }

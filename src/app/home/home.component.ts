@@ -44,6 +44,11 @@ export class HomeComponent implements OnInit {
   }
 
   get isEmptyCart() {
-    return this.orderService.orderItemMap.size < 1 ? true : false;
+    for (let val of this.orderService.orderItemMap.values()) {
+      if (val.qty > 0) {
+        return false;
+      }
+    }
+    return true;
   }
 }
