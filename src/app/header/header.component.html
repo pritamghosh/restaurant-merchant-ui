@@ -8,7 +8,11 @@
     <span class="menu-spacer"></span>
     <div style="flex-grow:1"></div>
     <div>
-      <button mat-icon-button [matMenuTriggerFor]="userMenu">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="userMenu"
+        [hidden]="!isLoggedIn"
+      >
         <mat-icon>person</mat-icon>
       </button>
       <mat-menu #userMenu="matMenu" [hidden]="!isLoggedIn">
