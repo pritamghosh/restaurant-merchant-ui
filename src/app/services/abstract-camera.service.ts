@@ -11,7 +11,6 @@ export function cameraFactory(
   if (platformInformationProvider.isMobileDevice) {
     return new MobileCameraService();
   }
-
   return new DesktopCameraService();
 }
 interface ICameraService {

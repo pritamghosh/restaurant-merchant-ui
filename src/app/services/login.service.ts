@@ -25,17 +25,17 @@ export class LoginService {
 
   public savetoContext(resp: any) {
     if (resp != null) {
-      localStorage.setItem(LOGIN_INFO_KEY, JSON.stringify(resp));
+      sessionStorage.setItem(LOGIN_INFO_KEY, JSON.stringify(resp));
       this.isLoggedInSubject.next(true);
     }
   }
   isLoggedIn(): boolean {
-    let resp = localStorage.getItem(LOGIN_INFO_KEY);
+    let resp = sessionStorage.getItem(LOGIN_INFO_KEY);
     return resp != null;
   }
 
   public clearContext() {
-    localStorage.removeItem(LOGIN_INFO_KEY);
+    sessionStorage.removeItem(LOGIN_INFO_KEY);
     this.isLoggedInSubject.next(false);
   }
   public signOut() {
@@ -43,8 +43,8 @@ export class LoginService {
   }
 
   getUser(): User {
-    localStorage.getItem(LOGIN_INFO_KEY);
-    let resp = localStorage.getItem(LOGIN_INFO_KEY);
+    sessionStorage.getItem(LOGIN_INFO_KEY);
+    let resp = sessionStorage.getItem(LOGIN_INFO_KEY);
     if (resp != null) {
       return JSON.parse(resp);
     }

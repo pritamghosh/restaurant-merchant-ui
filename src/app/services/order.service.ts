@@ -5,6 +5,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { AlertService } from "./alert.service";
 import { BusyDisplayService } from "./busy-display.service";
+import { LoginService } from "./login.service";
 
 @Injectable({
   providedIn: "root"
@@ -18,7 +19,8 @@ export class OrderService {
   constructor(
     private http: HttpClient,
     private alertService: AlertService,
-    private busyDisplayService: BusyDisplayService
+    private busyDisplayService: BusyDisplayService,
+    private loginService: LoginService
   ) {
     this.addMenuSubject.subscribe(val => {
       let item = this.orderItemMap.get(val.menuItem.name);
@@ -27,7 +29,9 @@ export class OrderService {
   }
 
   placeOrder(order: Order) {
+    order.restaurantUsername = this.loginService.getUser().username;
     console.log(order);
+
     this.http.post(`${environment.api}/order`, order).subscribe((resp: any) => {
       console.log(resp);
       this.busyDisplayService.showBusyDisplay(false);

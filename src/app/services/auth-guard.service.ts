@@ -22,11 +22,10 @@ export class AuthGuardService {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    // if (this.isLoggedIn) {
-    //   return true;
-    // }
-    // this.router.navigate(["login"], { queryParams: { returnUrl: state.url } });
-    //return false;
-    return true;
+    if (this.isLoggedIn) {
+      return true;
+    }
+    this.router.navigate(["login"], { queryParams: { returnUrl: state.url } });
+    return false;
   }
 }

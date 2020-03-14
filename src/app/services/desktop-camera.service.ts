@@ -27,25 +27,17 @@ export class DesktopCameraService {
   show() {
     if (this.getMediaDevices() == null) {
       alert("Need camera permission");
-      //return;
-    }
-    if (window.navigator.mediaDevices == null) {
-      alert("Need camera permission2");
       return;
     }
     this.getMediaDevices()
       .getUserMedia({ video: true, audio: false })
       .then(function(stream) {
-        alert("nside");
         var video: any = document.querySelector("#videoElement");
         video.srcObject = stream;
       })
       .catch(function(error) {
         console.log(error);
-
-        alert(error);
-        alert("Something went wrong!");
-        console.log("Something went wrong!");
+        alert("Need camera permission");
       });
   }
   getPhoto(): Observable<string> {

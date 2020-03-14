@@ -8,5 +8,6 @@ export class OrderItem {
 export class Order {
   email: string;
   faceId: string;
+  restaurantUsername: string;
   orderItems: OrderItem[];
 }
