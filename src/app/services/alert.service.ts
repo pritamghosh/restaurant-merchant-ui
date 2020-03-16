@@ -9,7 +9,7 @@ import { Router } from "@angular/router";
 export class AlertService {
   constructor(private router: Router, private dialog: MatDialog) {}
 
-  openDiaolog(msg: string, returnMethod?: any) {
+  openDiaolog(msg: string) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
