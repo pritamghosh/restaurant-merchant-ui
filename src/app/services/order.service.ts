@@ -23,8 +23,11 @@ export class OrderService {
     private loginService: LoginService
   ) {
     this.addMenuSubject.subscribe(val => {
-      let item = this.orderItemMap.get(val.menuItem.name);
-      this.orderItemMap.set(val.menuItem.name, val);
+      if (val.qty == 0) {
+        this.orderItemMap.delete(val.menuItem.name);
+      } else {
+        this.orderItemMap.set(val.menuItem.name, val);
+      }
     });
   }
 

@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
   }
   reset() {
     this.orderService.resetSubject.next(true);
+    this.orderService.orderItemMap = new Map();
   }
 
   get isEmptyCart() {
