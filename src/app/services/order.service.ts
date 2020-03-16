@@ -12,6 +12,7 @@ import { LoginService } from "./login.service";
 })
 export class OrderService {
   resetSubject = new Subject();
+  successfullSubject = new Subject();
   addMenuSubject = new Subject<OrderItem>();
 
   orderItemMap: Map<string, OrderItem> = new Map();
@@ -39,7 +40,15 @@ export class OrderService {
       .post(`${environment.api}/order`, order, { responseType: "text" })
       .subscribe((resp: any) => {
         this.busyDisplayService.showBusyDisplay(false);
-        this.alertService.openDiaolog(resp, "/");
+
+        this.alertService
+          .openDiaolog(resp)
+          .afterClosed()
+          .subscribe(() => {
+            this.successfullSubject.next(true);
+          });
       });
   }
+
+  return() {}
 }

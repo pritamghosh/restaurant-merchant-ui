@@ -9,7 +9,7 @@ import { Router } from "@angular/router";
 export class AlertService {
   constructor(private router: Router, private dialog: MatDialog) {}
 
-  openDiaolog(msg: string, returnUrl?: string) {
+  openDiaolog(msg: string, returnMethod?: any) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -20,11 +20,6 @@ export class AlertService {
       buttonName: "Ok"
     };
 
-    const dialogRef = this.dialog.open(AlertComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(() => {
-      if (returnUrl) {
-        this.router.navigate([returnUrl]);
-      }
-    });
+    return this.dialog.open(AlertComponent, dialogConfig);
   }
 }
