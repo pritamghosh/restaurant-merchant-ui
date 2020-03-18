@@ -24,6 +24,7 @@ export class ReviewComponent implements OnInit {
     this.service.orderItemMap.forEach(element => {
       this.items.push(element);
     });
+    this.service.orderItemMap;
   }
 
   openFaceIdDialog(): void {
@@ -45,7 +46,13 @@ export class ReviewComponent implements OnInit {
         let order = new Order();
         order.email = this.email;
         order.faceId = dialogConfig.data.faceId;
-        order.orderItems = this.items;
+        order.orderItems = [];
+        for (let val of this.service.orderItemMap.values()) {
+          if (val.qty > 0) {
+            order.orderItems.push(val);
+          }
+        }
+        this.service.orderItemMap.values();
         this.service.placeOrder(order);
       }
     });
