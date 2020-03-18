@@ -4,6 +4,8 @@ import { Subject, from } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { User } from "src/app/models/user.model";
 import { environment } from "src/environments/environment";
+import { BusyDisplayComponent } from "../busy-display/busy-display.component";
+import { BusyDisplayService } from "./busy-display.service";
 
 @Injectable({
   providedIn: "root"
@@ -11,13 +13,19 @@ import { environment } from "src/environments/environment";
 export class LoginService {
   isLoggedInSubject = new Subject<boolean>();
   balanceSubject = new Subject<number>();
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private busyDisplayService: BusyDisplayService
+  ) {}
 
   login(login: any): Promise<any> {
     this.signOut();
+    this.busyDisplayService.showBusyDisplay(true);
     return new Promise(resolve => {
       this.http.post(`${environment.api}/login`, login).subscribe(resp => {
         this.savetoContext(resp);
+
+        this.busyDisplayService.showBusyDisplay(false);
         resolve(true);
       });
     });

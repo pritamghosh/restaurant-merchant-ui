@@ -34,20 +34,17 @@ export class OrderService {
 
   placeOrder(order: Order) {
     order.restaurantUsername = this.loginService.getUser().username;
-    console.log(order);
 
-    this.http
-      .post(`${environment.api}/order`, order, { responseType: "text" })
-      .subscribe((resp: any) => {
-        this.busyDisplayService.showBusyDisplay(false);
+    this.http.post(`${environment.api}/order`, order).subscribe((resp: any) => {
+      this.busyDisplayService.showBusyDisplay(false);
 
-        this.alertService
-          .openDiaolog(resp)
-          .afterClosed()
-          .subscribe(() => {
-            this.successfullSubject.next(true);
-          });
-      });
+      this.alertService
+        .openDiaolog(resp)
+        .afterClosed()
+        .subscribe(() => {
+          this.successfullSubject.next(true);
+        });
+    });
   }
 
   return() {}
