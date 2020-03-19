@@ -39,7 +39,7 @@ export class OrderService {
       this.busyDisplayService.showBusyDisplay(false);
 
       this.alertService
-        .openDiaolog(resp)
+        .openDiaolog("Order Placed Successfilly !!")
         .afterClosed()
         .subscribe(() => {
           this.successfullSubject.next(true);
